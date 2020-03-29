@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="项目管理," />
+  <meta name="keywords" content="C++" />
 
 
 
@@ -69,21 +69,23 @@
 
 
 
-<meta name="description" content="项目管理七杯茶 书名：《项目管理七杯茶》 作者： 夸克商学院 概要：治大国若烹小鲜，以喝茶做类比；阐述了项目管理的七个关键过程  这本书讲了什么 有时候我们做的工作如同一份刚刚及格的答卷，没有明显错误，但同样没有值得嘉奖的地方  第一杯茶：启动茶 ”开始“不是做出来的，是说出来的  重点：背景分析、界定项目目的与目标、描述项目范围 意义：书面确立项目正式施行 成果判定：项目计划书 项目计划书项目启">
-<meta name="keywords" content="项目管理">
+<meta name="description" content="约定  右手坐标系 列向量   如何定位相机定位摄像机需要3个向量  相机位置 pos 观察位置 target 相机上向量 up   定义FPS相机Position、Target、Up、Pitch、Yaw 因为不需要翻滚，所以这里没有定义Roll 如何移动相机1vec3 Front=Target-Position;	 	//计算相机前进方向 相机前进和后退： 12Position += Fron">
 <meta property="og:type" content="article">
-<meta property="og:title" content="项目管理七杯茶">
-<meta property="og:url" content="http://gdlinklock.github.com/2018/04/14/seven-cups-of-tea-for-project-management/index.html">
+<meta property="og:title" content="camera-and-lookat">
+<meta property="og:url" content="http://gdlinklock.github.com/2020/03/28/camera-and-lookat/index.html">
 <meta property="og:site_name" content="观闻">
-<meta property="og:description" content="项目管理七杯茶 书名：《项目管理七杯茶》 作者： 夸克商学院 概要：治大国若烹小鲜，以喝茶做类比；阐述了项目管理的七个关键过程  这本书讲了什么 有时候我们做的工作如同一份刚刚及格的答卷，没有明显错误，但同样没有值得嘉奖的地方  第一杯茶：启动茶 ”开始“不是做出来的，是说出来的  重点：背景分析、界定项目目的与目标、描述项目范围 意义：书面确立项目正式施行 成果判定：项目计划书 项目计划书项目启">
+<meta property="og:description" content="约定  右手坐标系 列向量   如何定位相机定位摄像机需要3个向量  相机位置 pos 观察位置 target 相机上向量 up   定义FPS相机Position、Target、Up、Pitch、Yaw 因为不需要翻滚，所以这里没有定义Roll 如何移动相机1vec3 Front=Target-Position;	 	//计算相机前进方向 相机前进和后退： 12Position += Fron">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://gdlinklock.github.com/2018/04/14/seven-cups-of-tea-for-project-management/1524401204388.png">
-<meta property="og:image" content="http://gdlinklock.github.com/2018/04/14/seven-cups-of-tea-for-project-management/1524401274955.png">
-<meta property="og:updated_time" content="2020-01-01T08:17:39.555Z">
+<meta property="og:image" content="http://gdlinklock.github.com/2020/03/28/camera-and-lookat/1585404714096.png">
+<meta property="og:image" content="http://gdlinklock.github.com/2020/03/28/camera-and-lookat/1585456963733.png">
+<meta property="og:image" content="http://gdlinklock.github.com/2020/03/28/camera-and-lookat/1585443958345.png">
+<meta property="og:image" content="http://gdlinklock.github.com/2020/03/28/camera-and-lookat/1585444860584.png">
+<meta property="og:image" content="http://gdlinklock.github.com/2020/03/28/camera-and-lookat/1585405367107.png">
+<meta property="og:updated_time" content="2020-03-29T07:02:49.009Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="项目管理七杯茶">
-<meta name="twitter:description" content="项目管理七杯茶 书名：《项目管理七杯茶》 作者： 夸克商学院 概要：治大国若烹小鲜，以喝茶做类比；阐述了项目管理的七个关键过程  这本书讲了什么 有时候我们做的工作如同一份刚刚及格的答卷，没有明显错误，但同样没有值得嘉奖的地方  第一杯茶：启动茶 ”开始“不是做出来的，是说出来的  重点：背景分析、界定项目目的与目标、描述项目范围 意义：书面确立项目正式施行 成果判定：项目计划书 项目计划书项目启">
-<meta name="twitter:image" content="http://gdlinklock.github.com/2018/04/14/seven-cups-of-tea-for-project-management/1524401204388.png">
+<meta name="twitter:title" content="camera-and-lookat">
+<meta name="twitter:description" content="约定  右手坐标系 列向量   如何定位相机定位摄像机需要3个向量  相机位置 pos 观察位置 target 相机上向量 up   定义FPS相机Position、Target、Up、Pitch、Yaw 因为不需要翻滚，所以这里没有定义Roll 如何移动相机1vec3 Front=Target-Position;	 	//计算相机前进方向 相机前进和后退： 12Position += Fron">
+<meta name="twitter:image" content="http://gdlinklock.github.com/2020/03/28/camera-and-lookat/1585404714096.png">
 
 
 
@@ -113,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="http://gdlinklock.github.com/2018/04/14/seven-cups-of-tea-for-project-management/"/>
+  <link rel="canonical" href="http://gdlinklock.github.com/2020/03/28/camera-and-lookat/"/>
 
 
 
 
 
-  <title>项目管理七杯茶 | 观闻</title>
+  <title>camera-and-lookat | 观闻</title>
   
 
 
@@ -280,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2018/04/14/seven-cups-of-tea-for-project-management/">
+    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2020/03/28/camera-and-lookat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -297,7 +299,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">项目管理七杯茶</h2>
+          <h2 class="post-title" itemprop="name headline">camera-and-lookat</h2>
         
 
         <div class="post-meta">
@@ -309,8 +311,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-14T14:38:41+08:00">
-                2018-04-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-28T11:14:07+08:00">
+                2020-03-28
               </time>
             
 
@@ -325,8 +327,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-01T16:17:39+08:00">
-                2020-01-01
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-29T15:02:49+08:00">
+                2020-03-29
               </time>
             
           </span>
@@ -364,225 +366,50 @@
       
 
       
-        <h1 id="项目管理七杯茶"><a href="#项目管理七杯茶" class="headerlink" title="项目管理七杯茶"></a>项目管理七杯茶</h1><ul>
-<li>书名：《项目管理七杯茶》</li>
-<li>作者： 夸克商学院</li>
-<li>概要：治大国若烹小鲜，以喝茶做类比；阐述了项目管理的七个关键过程</li>
+        <blockquote>
+<p>约定</p>
+<ul>
+<li>右手坐标系</li>
+<li>列向量</li>
 </ul>
-<h2 id="这本书讲了什么"><a href="#这本书讲了什么" class="headerlink" title="这本书讲了什么"></a>这本书讲了什么</h2><blockquote>
-<p>有时候我们做的工作如同一份刚刚及格的答卷，没有明显错误，但同样没有值得嘉奖的地方</p>
 </blockquote>
-<h3 id="第一杯茶：启动茶"><a href="#第一杯茶：启动茶" class="headerlink" title="第一杯茶：启动茶"></a>第一杯茶：启动茶</h3><blockquote>
-<p>”开始“不是做出来的，是说出来的</p>
-</blockquote>
-<p><em>重点</em>：背景分析、界定项目目的与目标、描述项目范围</p>
-<p><em>意义</em>：书面确立项目正式施行</p>
-<p><em>成果判定</em>：项目计划书</p>
-<h4 id="项目计划书"><a href="#项目计划书" class="headerlink" title="项目计划书"></a>项目计划书</h4><p><strong>项目启动会</strong>不仅决定了项目的大轮廓，更重要的是传递一种氛围，标志项目正式施行。（仪式感）</p>
-<p><strong>项目计划书要点</strong></p>
+<h3 id="如何定位相机"><a href="#如何定位相机" class="headerlink" title="如何定位相机"></a>如何定位相机</h3><p>定位摄像机需要3个向量</p>
 <ul>
-<li>项目背景<ul>
-<li>描述工作项目的提出原因、环境背景、优势及劣势分析、项目运作的可行性、项目的独特与创新分析、项目最终要取得的效果等</li>
+<li>相机位置 pos</li>
+<li>观察位置 target</li>
+<li>相机上向量 up</li>
 </ul>
-</li>
-<li>项目目的与目标</li>
-<li>项目原则<ul>
-<li>项目原则是对项目是否进行下去“是”与“非”的准则</li>
-<li>管理原则，是针对工作项目管理方向的是非判断，也是定性标准</li>
-<li>技术原则，是针对工作项目技术方向的是非判断，也是定量的标准</li>
-<li>项目原则的设定，最有效防止了“失误”的产生</li>
-<li>项目原则应该个性鲜明，要摒弃“假、大、空”的原则</li>
-<li>项目原则相当于执行工作的“宪法”，只要违背了项目原则，工作就不能继续下去</li>
-</ul>
-</li>
-<li>关键路径图</li>
-<li>任务列表</li>
-<li>关键问题分析</li>
-<li>项目组成成员及时间投入</li>
-</ul>
-<p>目的与目标的区别</p>
+<p><img src="/2020/03/28/camera-and-lookat/1585404714096.png" alt="1585404714096"></p>
+<h3 id="定义FPS相机"><a href="#定义FPS相机" class="headerlink" title="定义FPS相机"></a>定义FPS相机</h3><p>Position、Target、Up、Pitch、Yaw</p>
+<p>因为不需要翻滚，所以这里没有定义Roll</p>
+<h3 id="如何移动相机"><a href="#如何移动相机" class="headerlink" title="如何移动相机"></a>如何移动相机</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vec3 Front=Target-Position;	 	<span class="comment">//计算相机前进方向</span></span><br></pre></td></tr></table></figure>
+<p>相机前进和后退：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Position += Front;			 <span class="comment">//相机前进</span></span><br><span class="line">Position -=	Front；			<span class="comment">//相机后退</span></span><br></pre></td></tr></table></figure>
+<p>相机左右移动：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vec Right = cross(Front,v3c(<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>));	 <span class="comment">//重新计算Right，因为Front会因为旋转而改变</span></span><br><span class="line">Position += Right;			<span class="comment">//相机右移</span></span><br><span class="line">Position -= Right；			<span class="comment">//相机左移</span></span><br></pre></td></tr></table></figure>
+<h3 id="如何旋转相机"><a href="#如何旋转相机" class="headerlink" title="如何旋转相机"></a>如何旋转相机</h3><p><img src="/2020/03/28/camera-and-lookat/1585456963733.png" alt="1585456963733"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">front.y = sin(pitch);</span><br><span class="line">front.x = cos(pitch) * cos(yaw);</span><br><span class="line">front.z = cos(pitch) * sin(yaw);</span><br><span class="line">Front=normalize(front)</span><br><span class="line"></span><br><span class="line">mat4 view = lookat(Position,Position+Front,Up);</span><br></pre></td></tr></table></figure>
+<h3 id="推导LookAt"><a href="#推导LookAt" class="headerlink" title="推导LookAt"></a>推导LookAt</h3><p>首先，明确两个matrix</p>
 <ul>
-<li>目的是工作应达到的最终效果，而目标是达到最终效果的阶段性量化指标。常见错误是把过程描述为目的。</li>
+<li>camera transform matrix将camera当做世界中的一个物体来看，用于定位相机位置和朝向；记为 M<sub>tm </sub></li>
+<li>view matrix，用于将world space转换到view space，记为 M<sub>view</sub></li>
 </ul>
-<h4 id="SMART目标定义原则"><a href="#SMART目标定义原则" class="headerlink" title="SMART目标定义原则"></a>SMART目标定义原则</h4><ul>
-<li>Specific</li>
-<li>Measurable</li>
-<li>Attainable</li>
-<li>Relevant</li>
-<li>Time-based</li>
-</ul>
-<h3 id="第二杯茶：路径茶"><a href="#第二杯茶：路径茶" class="headerlink" title="第二杯茶：路径茶"></a>第二杯茶：路径茶</h3><p><em>重点</em>：拆分关键任务、量化考核标准</p>
-<p><em>意义</em>：书面明确工作进程路线图</p>
-<p><em>成果判定</em>：项目执行路径图</p>
-<h4 id="分解关键路径"><a href="#分解关键路径" class="headerlink" title="分解关键路径"></a>分解关键路径</h4><p>项目目标确定之后，接下来就是确定执行那些工作要素来完成它</p>
-<p>关键路径与非关键路径</p>
-<p>里程碑的前置与后置</p>
-<p>里程碑的描述</p>
-<p>制定关键路径图：正推法和倒推法</p>
-<h4 id="配置最优路径"><a href="#配置最优路径" class="headerlink" title="配置最优路径"></a>配置最优路径</h4><p>任务信物</p>
-<h4 id="路径优化六法"><a href="#路径优化六法" class="headerlink" title="路径优化六法"></a>路径优化六法</h4><p>减少关键路径中的里程碑</p>
-<p>调整路径排列，将串行变为并行</p>
-<p>缩短早期任务</p>
-<p>缩短最长任务</p>
-<p>缩短最容易任务</p>
-<p>缩短成本最少任务</p>
-<h3 id="第三杯茶：资源茶"><a href="#第三杯茶：资源茶" class="headerlink" title="第三杯茶：资源茶"></a>第三杯茶：资源茶</h3><p><em>重点</em>：最小化预算、关键资源控制</p>
-<p><em>意义</em>：资金详细配给方案</p>
-<p><em>成果判定</em>：项目预算报表</p>
-<h4 id="需要控制的成本"><a href="#需要控制的成本" class="headerlink" title="需要控制的成本"></a>需要控制的成本</h4><p>成本管理主要包括项目预算和成本使用监控两大方面</p>
-<p>常见项目成本有:</p>
-<ul>
-<li>人工成本</li>
-<li>材料成本</li>
-<li>分包成本</li>
-<li>设备成本</li>
-<li>差旅成本</li>
-</ul>
-<h4 id="跟踪成本绩效成果"><a href="#跟踪成本绩效成果" class="headerlink" title="跟踪成本绩效成果"></a>跟踪成本绩效成果</h4><p>名词</p>
-<ul>
-<li>累计预算成本</li>
-<li>累计实际成本</li>
-<li>盈余量=每项任务预算成本*完工比率</li>
-<li>累计盈余量</li>
-</ul>
-<h4 id="三个常用跟踪指标"><a href="#三个常用跟踪指标" class="headerlink" title="三个常用跟踪指标"></a>三个常用跟踪指标</h4><ul>
-<li>成本绩效指数=累计盈余量/累计实际成本</li>
-<li>成本差异=累计 盈余量-累计实际成本</li>
-<li>预测完工成本=总预算成本/成本绩效指数</li>
-</ul>
-<h4 id="理性的成本控制方法"><a href="#理性的成本控制方法" class="headerlink" title="理性的成本控制方法"></a>理性的成本控制方法</h4><ul>
-<li>分析成本绩效，确定哪个任务模块需要采取纠正措施</li>
-<li>研究决策采取哪些纠正措施</li>
-<li>修正项目计划书，包括工期和成本预算，或者加入临时修正计划</li>
-<li>成本差异负值最大的任务模块给予最高纠正优先级</li>
-</ul>
-<h3 id="第四杯茶：时间茶"><a href="#第四杯茶：时间茶" class="headerlink" title="第四杯茶：时间茶"></a>第四杯茶：时间茶</h3><p><em>重点</em>：合理安排执行时间、滞后与提前时限处理、加班计划</p>
-<p><em>意义</em>：明确执行时限节点</p>
-<p><em>成果判定</em>：执行时间甘特图</p>
-<blockquote>
-<p>学生综合征：人类倾向于浪费 时间的习惯，被称为学生综合征。正常人倾向于不由自主的拖延时间，尽可能拖延至最后的时刻</p>
-<p>帕克森定律：工作总是拖延到它所能够允许最迟完成的那一天</p>
-<p>“不对称信息理论“研究有一个有趣现象：提前完成工作的人不会受到奖赏，反而会得到惩罚</p>
-</blockquote>
-<h4 id="项目时间控制流程图"><a href="#项目时间控制流程图" class="headerlink" title="项目时间控制流程图"></a>项目时间控制流程图</h4><p><img src="/2018/04/14/seven-cups-of-tea-for-project-management/1524401204388.png" alt=""></p>
-<h4 id="到底该不该加班"><a href="#到底该不该加班" class="headerlink" title="到底该不该加班"></a>到底该不该加班</h4><p>对于高度不确定任务的工期预算，要通过三个维度进行计算：</p>
-<ul>
-<li><p>乐观时间(Optimistic Time，To),</p>
-</li>
-<li><p>最可能时间(Most like Time,Tm)</p>
-</li>
-<li><p>悲观时间(Pessimistic Time,Tp)</p>
-</li>
-</ul>
-<p>期望工期</p>
-<p>Te=(To+4Tm+Tp)/6</p>
-<h4 id="加班的斜率"><a href="#加班的斜率" class="headerlink" title="加班的斜率"></a>加班的斜率</h4><p><img src="/2018/04/14/seven-cups-of-tea-for-project-management/./1524401274955.png" alt="加班斜率"></p>
-<h3 id="第五杯茶：人员茶"><a href="#第五杯茶：人员茶" class="headerlink" title="第五杯茶：人员茶"></a>第五杯茶：人员茶</h3><p><em>重点</em>：项目经理权责界定、沟通与跨部门协作、明确项目团队成员责权利</p>
-<p><em>意义</em>：人力资源调配原则</p>
-<p><em>成果判定</em>：RACI责任矩阵图</p>
-<h4 id="效率的来源"><a href="#效率的来源" class="headerlink" title="效率的来源"></a>效率的来源</h4><p>提高项目团队的工作效率，至少需要两种要素的相互配合，即职业的项目经理人和训练有素的项目团队成员</p>
-<h5 id="项目经理人8种管理素养"><a href="#项目经理人8种管理素养" class="headerlink" title="项目经理人8种管理素养"></a>项目经理人8种管理素养</h5><ol>
-<li>责任心与使命感</li>
-<li>分析与解决问题的能力</li>
-<li>领导能力</li>
-<li>沟通能力</li>
-<li>优先顺序设置能力</li>
-<li>计划能力</li>
-<li>团队精神</li>
-<li>创新能力</li>
-</ol>
-<p>有效授权</p>
-<h5 id="项目团队"><a href="#项目团队" class="headerlink" title="项目团队"></a>项目团队</h5><p>项目团队四种状态</p>
-<ul>
-<li>合作</li>
-<li>震荡</li>
-<li>信任</li>
-<li>活力</li>
-</ul>
-<h5 id="RACI责任矩阵"><a href="#RACI责任矩阵" class="headerlink" title="RACI责任矩阵"></a>RACI责任矩阵</h5><ul>
-<li>Responsible：执行人，实际做事的人</li>
-<li>Accountable：责任人，就是对项目结果负责的人，只有经过他同意，项目才能在关键环节得以进行</li>
-<li>Consulted：咨询人，在决策之前必须被征求意见的人，他的意见可以左右决策是否被执行，但最终需要责任人确认</li>
-<li>Informed：告知人，采取行动取得结果必须给告知的人，也是检验，评价结果的人，在执行过程中却不必向他征询意见</li>
-</ul>
-<p>一个成功的项目经理人，并不是项目工作的监督者，而是通过执行工作，训练带领出一班素质过硬的团队，然后做出非同寻常的成绩。</p>
-<h3 id="第六杯茶：风险茶"><a href="#第六杯茶：风险茶" class="headerlink" title="第六杯茶：风险茶"></a>第六杯茶：风险茶</h3><blockquote>
-<p>善泳者溺于水</p>
-</blockquote>
-<p><em>重点</em>：衡量内外部风险、有效规避风险、紧急预案</p>
-<p><em>意义</em>：最大可能避免节外生技</p>
-<p><em>成果判定</em>：内外部风险控制计划书</p>
-<h4 id="常见风险发生时期"><a href="#常见风险发生时期" class="headerlink" title="常见风险发生时期"></a>常见风险发生时期</h4><p>在项目执行周期中，风险与机遇是动态变化的</p>
-<p>常见的项目风险</p>
-<ol>
-<li>战略风险</li>
-<li>财务风险</li>
-<li>技术风险</li>
-<li>商业风险</li>
-<li>法务风险</li>
-<li>人事风险</li>
-<li>执行风险</li>
-</ol>
-<h4 id="项目风险定性分析"><a href="#项目风险定性分析" class="headerlink" title="项目风险定性分析"></a>项目风险定性分析</h4><ul>
-<li>有警告信息风险</li>
-<li>有警告信息风向</li>
-</ul>
-<p>故障树、风险树、鱼骨图</p>
-<p>德尔菲法、专家会议法、情景分析法</p>
-<h4 id="项目风险定量分析"><a href="#项目风险定量分析" class="headerlink" title="项目风险定量分析"></a>项目风险定量分析</h4><p>进行定量分析，找到项目风险系数</p>
-<h4 id="几种风险规避方法"><a href="#几种风险规避方法" class="headerlink" title="几种风险规避方法"></a>几种风险规避方法</h4><ul>
-<li>风险规避：放弃使用有风险的项目资源、项目技术、项目方案等</li>
-<li>风险遏制：遏制项目风险引发原因</li>
-<li>风险转移</li>
-<li>风险化解</li>
-<li>风险容忍</li>
-</ul>
-<p>风险识别、风险监控、风险应对、风险归档</p>
-<h3 id="第七杯茶：收尾茶"><a href="#第七杯茶：收尾茶" class="headerlink" title="第七杯茶：收尾茶"></a>第七杯茶：收尾茶</h3><p><em>重点</em>：成果评估准则、项目归档文件</p>
-<p><em>意义</em>：让有益的经验不断复制</p>
-<p><em>成果判定</em>：项目档案</p>
-<p>将项目执行的过程、遇到的问题、面临的风险、克服的办法、判定的标准等整理成文档，以备日后工作参考</p>
-<p>可以这样说，我们的所有工作都是为了获取如何得成果的档案，这是我们的最高目标，直至同类工作成功的概率为100%</p>
-<h4 id="项目终止类别"><a href="#项目终止类别" class="headerlink" title="项目终止类别"></a>项目终止类别</h4><ul>
-<li>绝对式终止</li>
-<li>解散式终止</li>
-<li>独立式终止</li>
-<li>溢出式终止</li>
-</ul>
-<h4 id="项目结束双要素"><a href="#项目结束双要素" class="headerlink" title="项目结束双要素"></a>项目结束双要素</h4><p>项目评估</p>
-<p>项目存档模板</p>
-<ul>
-<li>项目绩效档案</li>
-<li>管理绩效档案</li>
-<li>组织绩效档案</li>
-<li>团队绩效档案</li>
-<li>技术标准档案</li>
-<li>边际效益档案</li>
-</ul>
-<h4 id="文档参考"><a href="#文档参考" class="headerlink" title="文档参考"></a>文档参考</h4><p>项目变更确认函</p>
-<ul>
-<li>项目名称、项目编号、项目经理、项目类型</li>
-<li>变更前后、变更原因</li>
-</ul>
-<p>项目结束确认函</p>
-<ul>
-<li>项目名称、项目编号、项目经理、项目类型</li>
-</ul>
-<ul>
-<li>已达成目标</li>
-<li>项目成果</li>
-<li>启动日期、实际完成日期、 项目成本、人力成本</li>
-</ul>
-<p>项目总结</p>
-<ul>
-<li>项目名称、项目编号、部门、项目经理</li>
-<li>项目背景</li>
-<li>项目目的</li>
-<li>项目成果与结论</li>
-<li>核心发现</li>
-<li>存在问题</li>
-</ul>
-<h2 id="我的理解"><a href="#我的理解" class="headerlink" title="我的理解"></a>我的理解</h2><p>作者以茶类比项目管理，将项目管理的关键过程使用比较通俗的方式进行讲解，相比PMBOK没有那么枯燥。在应用到自己的项目中时要结合实际情况，对我来说最有用的三个工具是，smart目标定义原则，不确定工期任务管理以及raci责任矩阵。而风险管理中讲到的风险定量分析则很难应用，主要是因为风险系数评估没有适合自身评估模型可用，有待探索总结。</p>
+<p>其中：</p>
+<p> M<sub>tm</sub>=M<sub>T</sub> * M<sub>R</sub></p>
+<p>相机作为世界中的一个物体，在确认位置和朝向时；操作的顺序是先旋转再平移；因为我们使用的列向量，所以上述记法M<sub>R</sub>在右侧。也就是说，从右到左进行计算。</p>
+<p>下图(px,py,pz)表示相机位置，r1-r9表示3x3的旋转矩阵。</p>
+<p><img src="/2020/03/28/camera-and-lookat/1585443958345.png" alt="1585443958345"></p>
+<p>M<sub>view</sub>=M<sub>tm</sub><sup>-1</sup>=M<sub>R</sub><sup>-1</sup> <em> M<sub>T</sub><sup>-1</sup>=M<sub>R</sub><sup>T</sup> </em> M<sub>T</sub><sup>-1</sup></p>
+<p>因为旋转矩阵是正交矩阵，正交矩阵的逆等于其转置，因此</p>
+<p>M<sub>view</sub>=M<sub>R</sub><sup>T</sup> * M<sub>T</sub><sup>-1</sup></p>
+<p><img src="/2020/03/28/camera-and-lookat/1585444860584.png" alt="1585444860584"></p>
+<p><img src="/2020/03/28/camera-and-lookat/1585405367107.png" alt="1585405367107"></p>
+<p>下面我们计算right、up、forward三个向量。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vec3 worldup=(<span class="number">0.f</span>,<span class="number">1.f</span>,<span class="number">0.f</span>);</span><br><span class="line"></span><br><span class="line">vec3 forward = normalize(pos-target);			<span class="comment">//zaxis,注意forward指向z正向</span></span><br><span class="line">vec3 right = normalize(cross(worldup,forward));		<span class="comment">//xaxis</span></span><br><span class="line">vec3 up = normalize(cross(forward,right));		<span class="comment">//yaxis</span></span><br></pre></td></tr></table></figure>
+<p>由上我们求得了3个正交基向量，代入上面的公式，可得到view matrix</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|	right.x		right.y		right.z		-dot(right,pos)		|</span><br><span class="line">|	up.x		up.y		up.z		-dot(up,pos)		|</span><br><span class="line">|	forward.x	forward.y	forward.z	-dot(forward,pos)	|</span><br><span class="line">|	<span class="number">0</span>		<span class="number">0</span>		<span class="number">0</span>		<span class="number">1</span>			|</span><br></pre></td></tr></table></figure>
+<p>实现LookAtRH</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">mat4 <span class="title">LookAtRH</span><span class="params">(vec3 position,vec3 target,vec3 wolrdup)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vec3 forward = normalize(position-target);</span><br><span class="line">    vec3 right 	 = normalize(cross(nomalize(worldup),forward));</span><br><span class="line">    vec3 up	 = normalize(forward,right);</span><br><span class="line">    </span><br><span class="line">    <span class="function">mat4 <span class="title">view</span><span class="params">(<span class="number">1.0f</span>)</span></span>;</span><br><span class="line">    view[<span class="number">0</span>][<span class="number">0</span>] = right.x;	view[<span class="number">1</span>][<span class="number">0</span>] = right.y;	view[<span class="number">2</span>][<span class="number">0</span>] = right.z;	view[<span class="number">3</span>][<span class="number">0</span>] = -dot(right, position);</span><br><span class="line">    view[<span class="number">0</span>][<span class="number">1</span>] = up.x;		view[<span class="number">1</span>][<span class="number">1</span>] = up.y;	view[<span class="number">2</span>][<span class="number">1</span>] = up.z;	view[<span class="number">3</span>][<span class="number">1</span>] = -dot(up, position);</span><br><span class="line">    view[<span class="number">0</span>][<span class="number">2</span>] = forward.x;	view[<span class="number">1</span>][<span class="number">2</span>] = forward.y;	view[<span class="number">2</span>][<span class="number">2</span>] = forward.z;	view[<span class="number">3</span>][<span class="number">2</span>] = -dot(forward, position);</span><br><span class="line">    view[<span class="number">0</span>][<span class="number">3</span>] = <span class="number">0</span>;		view[<span class="number">1</span>][<span class="number">3</span>] = <span class="number">0</span>;		view[<span class="number">2</span>][<span class="number">3</span>] = <span class="number">0</span>; 	view[<span class="number">3</span>][<span class="number">3</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> view;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -603,7 +430,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://gdlinklock.github.com/2018/04/14/seven-cups-of-tea-for-project-management/" title="项目管理七杯茶">http://gdlinklock.github.com/2018/04/14/seven-cups-of-tea-for-project-management/</a>
+    <a href="http://gdlinklock.github.com/2020/03/28/camera-and-lookat/" title="camera-and-lookat">http://gdlinklock.github.com/2020/03/28/camera-and-lookat/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -616,12 +443,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/项目管理/" rel="tag"># 项目管理</a>
-          
-        </div>
-      
 
       
       
@@ -631,8 +452,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/02/principles/" rel="next" title="原则">
-                <i class="fa fa-chevron-left"></i> 原则
+              <a href="/2020/01/30/2019-nCov/" rel="next" title="2019-nCov">
+                <i class="fa fa-chevron-left"></i> 2019-nCov
               </a>
             
           </div>
@@ -640,10 +461,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/04/into-dump/" rel="prev" title="转储分析杂谈">
-                转储分析杂谈 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -793,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#项目管理七杯茶"><span class="nav-number">1.</span> <span class="nav-text">项目管理七杯茶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#这本书讲了什么"><span class="nav-number">1.1.</span> <span class="nav-text">这本书讲了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一杯茶：启动茶"><span class="nav-number">1.1.1.</span> <span class="nav-text">第一杯茶：启动茶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目计划书"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">项目计划书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SMART目标定义原则"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">SMART目标定义原则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二杯茶：路径茶"><span class="nav-number">1.1.2.</span> <span class="nav-text">第二杯茶：路径茶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分解关键路径"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">分解关键路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置最优路径"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">配置最优路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路径优化六法"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">路径优化六法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三杯茶：资源茶"><span class="nav-number">1.1.3.</span> <span class="nav-text">第三杯茶：资源茶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#需要控制的成本"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">需要控制的成本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跟踪成本绩效成果"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">跟踪成本绩效成果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三个常用跟踪指标"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">三个常用跟踪指标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理性的成本控制方法"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">理性的成本控制方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四杯茶：时间茶"><span class="nav-number">1.1.4.</span> <span class="nav-text">第四杯茶：时间茶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目时间控制流程图"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">项目时间控制流程图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#到底该不该加班"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">到底该不该加班</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加班的斜率"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">加班的斜率</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五杯茶：人员茶"><span class="nav-number">1.1.5.</span> <span class="nav-text">第五杯茶：人员茶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#效率的来源"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">效率的来源</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#项目经理人8种管理素养"><span class="nav-number">1.1.5.1.1.</span> <span class="nav-text">项目经理人8种管理素养</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#项目团队"><span class="nav-number">1.1.5.1.2.</span> <span class="nav-text">项目团队</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RACI责任矩阵"><span class="nav-number">1.1.5.1.3.</span> <span class="nav-text">RACI责任矩阵</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六杯茶：风险茶"><span class="nav-number">1.1.6.</span> <span class="nav-text">第六杯茶：风险茶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见风险发生时期"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">常见风险发生时期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#项目风险定性分析"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">项目风险定性分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#项目风险定量分析"><span class="nav-number">1.1.6.3.</span> <span class="nav-text">项目风险定量分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#几种风险规避方法"><span class="nav-number">1.1.6.4.</span> <span class="nav-text">几种风险规避方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第七杯茶：收尾茶"><span class="nav-number">1.1.7.</span> <span class="nav-text">第七杯茶：收尾茶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目终止类别"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">项目终止类别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#项目结束双要素"><span class="nav-number">1.1.7.2.</span> <span class="nav-text">项目结束双要素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文档参考"><span class="nav-number">1.1.7.3.</span> <span class="nav-text">文档参考</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的理解"><span class="nav-number">1.2.</span> <span class="nav-text">我的理解</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何定位相机"><span class="nav-number">1.</span> <span class="nav-text">如何定位相机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义FPS相机"><span class="nav-number">2.</span> <span class="nav-text">定义FPS相机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何移动相机"><span class="nav-number">3.</span> <span class="nav-text">如何移动相机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何旋转相机"><span class="nav-number">4.</span> <span class="nav-text">如何旋转相机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推导LookAt"><span class="nav-number">5.</span> <span class="nav-text">推导LookAt</span></a></li></ol></div>
             
 
           </div>

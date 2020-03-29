@@ -273,6 +273,319 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2020/03/28/camera-and-lookat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="观闻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/28/camera-and-lookat/" itemprop="url">camera-and-lookat</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-28T11:14:07+08:00">
+                2020-03-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-29T15:02:49+08:00">
+                2020-03-29
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>约定</p>
+<ul>
+<li>右手坐标系</li>
+<li>列向量</li>
+</ul>
+</blockquote>
+<h3 id="如何定位相机"><a href="#如何定位相机" class="headerlink" title="如何定位相机"></a>如何定位相机</h3><p>定位摄像机需要3个向量</p>
+<ul>
+<li>相机位置 pos</li>
+<li>观察位置 target</li>
+<li>相机上向量 up</li>
+</ul>
+<p><img src="/2020/03/28/camera-and-lookat/1585404714096.png" alt="1585404714096"></p>
+<h3 id="定义FPS相机"><a href="#定义FPS相机" class="headerlink" title="定义FPS相机"></a>定义FPS相机</h3><p>Position、Target、Up、Pitch、Yaw</p>
+<p>因为不需要翻滚，所以这里没有定义Roll</p>
+<h3 id="如何移动相机"><a href="#如何移动相机" class="headerlink" title="如何移动相机"></a>如何移动相机</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vec3 Front=Target-Position;	 	<span class="comment">//计算相机前进方向</span></span><br></pre></td></tr></table></figure>
+<p>相机前进和后退：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Position += Front;			 <span class="comment">//相机前进</span></span><br><span class="line">Position -=	Front；			<span class="comment">//相机后退</span></span><br></pre></td></tr></table></figure>
+<p>相机左右移动：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vec Right = cross(Front,v3c(<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>));	 <span class="comment">//重新计算Right，因为Front会因为旋转而改变</span></span><br><span class="line">Position += Right;			<span class="comment">//相机右移</span></span><br><span class="line">Position -= Right；			<span class="comment">//相机左移</span></span><br></pre></td></tr></table></figure>
+<h3 id="如何旋转相机"><a href="#如何旋转相机" class="headerlink" title="如何旋转相机"></a>如何旋转相机</h3><p><img src="/2020/03/28/camera-and-lookat/1585456963733.png" alt="1585456963733"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">front.y = sin(pitch);</span><br><span class="line">front.x = cos(pitch) * cos(yaw);</span><br><span class="line">front.z = cos(pitch) * sin(yaw);</span><br><span class="line">Front=normalize(front)</span><br><span class="line"></span><br><span class="line">mat4 view = lookat(Position,Position+Front,Up);</span><br></pre></td></tr></table></figure>
+<h3 id="推导LookAt"><a href="#推导LookAt" class="headerlink" title="推导LookAt"></a>推导LookAt</h3><p>首先，明确两个matrix</p>
+<ul>
+<li>camera transform matrix将camera当做世界中的一个物体来看，用于定位相机位置和朝向；记为 M<sub>tm </sub></li>
+<li>view matrix，用于将world space转换到view space，记为 M<sub>view</sub></li>
+</ul>
+<p>其中：</p>
+<p> M<sub>tm</sub>=M<sub>T</sub> * M<sub>R</sub></p>
+<p>相机作为世界中的一个物体，在确认位置和朝向时；操作的顺序是先旋转再平移；因为我们使用的列向量，所以上述记法M<sub>R</sub>在右侧。也就是说，从右到左进行计算。</p>
+<p>下图(px,py,pz)表示相机位置，r1-r9表示3x3的旋转矩阵。</p>
+<p><img src="/2020/03/28/camera-and-lookat/1585443958345.png" alt="1585443958345"></p>
+<p>M<sub>view</sub>=M<sub>tm</sub><sup>-1</sup>=M<sub>R</sub><sup>-1</sup> <em> M<sub>T</sub><sup>-1</sup>=M<sub>R</sub><sup>T</sup> </em> M<sub>T</sub><sup>-1</sup></p>
+<p>因为旋转矩阵是正交矩阵，正交矩阵的逆等于其转置，因此</p>
+<p>M<sub>view</sub>=M<sub>R</sub><sup>T</sup> * M<sub>T</sub><sup>-1</sup></p>
+<p><img src="/2020/03/28/camera-and-lookat/1585444860584.png" alt="1585444860584"></p>
+<p><img src="/2020/03/28/camera-and-lookat/1585405367107.png" alt="1585405367107"></p>
+<p>下面我们计算right、up、forward三个向量。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vec3 worldup=(<span class="number">0.f</span>,<span class="number">1.f</span>,<span class="number">0.f</span>);</span><br><span class="line"></span><br><span class="line">vec3 forward = normalize(pos-target);			<span class="comment">//zaxis,注意forward指向z正向</span></span><br><span class="line">vec3 right = normalize(cross(worldup,forward));		<span class="comment">//xaxis</span></span><br><span class="line">vec3 up = normalize(cross(forward,right));		<span class="comment">//yaxis</span></span><br></pre></td></tr></table></figure>
+<p>由上我们求得了3个正交基向量，代入上面的公式，可得到view matrix</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|	right.x		right.y		right.z		-dot(right,pos)		|</span><br><span class="line">|	up.x		up.y		up.z		-dot(up,pos)		|</span><br><span class="line">|	forward.x	forward.y	forward.z	-dot(forward,pos)	|</span><br><span class="line">|	<span class="number">0</span>		<span class="number">0</span>		<span class="number">0</span>		<span class="number">1</span>			|</span><br></pre></td></tr></table></figure>
+<p>实现LookAtRH</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">mat4 <span class="title">LookAtRH</span><span class="params">(vec3 position,vec3 target,vec3 wolrdup)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vec3 forward = normalize(position-target);</span><br><span class="line">    vec3 right 	 = normalize(cross(nomalize(worldup),forward));</span><br><span class="line">    vec3 up	 = normalize(forward,right);</span><br><span class="line">    </span><br><span class="line">    <span class="function">mat4 <span class="title">view</span><span class="params">(<span class="number">1.0f</span>)</span></span>;</span><br><span class="line">    view[<span class="number">0</span>][<span class="number">0</span>] = right.x;	view[<span class="number">1</span>][<span class="number">0</span>] = right.y;	view[<span class="number">2</span>][<span class="number">0</span>] = right.z;	view[<span class="number">3</span>][<span class="number">0</span>] = -dot(right, position);</span><br><span class="line">    view[<span class="number">0</span>][<span class="number">1</span>] = up.x;		view[<span class="number">1</span>][<span class="number">1</span>] = up.y;	view[<span class="number">2</span>][<span class="number">1</span>] = up.z;	view[<span class="number">3</span>][<span class="number">1</span>] = -dot(up, position);</span><br><span class="line">    view[<span class="number">0</span>][<span class="number">2</span>] = forward.x;	view[<span class="number">1</span>][<span class="number">2</span>] = forward.y;	view[<span class="number">2</span>][<span class="number">2</span>] = forward.z;	view[<span class="number">3</span>][<span class="number">2</span>] = -dot(forward, position);</span><br><span class="line">    view[<span class="number">0</span>][<span class="number">3</span>] = <span class="number">0</span>;		view[<span class="number">1</span>][<span class="number">3</span>] = <span class="number">0</span>;		view[<span class="number">2</span>][<span class="number">3</span>] = <span class="number">0</span>; 	view[<span class="number">3</span>][<span class="number">3</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> view;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2020/01/30/2019-nCov/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="观闻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/30/2019-nCov/" itemprop="url">2019-nCov</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-30T10:55:47+08:00">
+                2020-01-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-28T11:19:44+08:00">
+                2020-03-28
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>春节本应是举欢庆、阖家团圆的日子；谁都没想到武汉肺炎席卷来整个大地。以下是维基上的记录：</p>
+<blockquote>
+<p><strong>2019－2020年新型冠状病毒肺炎事件</strong>，<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%9B%BD%E5%AE%B6%E5%8D%AB%E7%94%9F%E5%81%A5%E5%BA%B7%E5%A7%94%E5%91%98%E4%BC%9A" target="_blank" rel="noopener">中华人民共和国国家卫生健康委员会</a>标准名称为<strong>新型冠状病毒感染的肺炎疫情</strong><a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-%E6%8A%A5%E9%81%930123J-35" target="_blank" rel="noopener">[35]</a>，是指由<a href="https://zh.wikipedia.org/wiki/2019%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8A%B6%E7%97%85%E6%AF%92" target="_blank" rel="noopener">2019新型冠状病毒</a>所导致，且包括<a href="https://zh.wikipedia.org/wiki/%E5%8F%91%E7%83%AD" target="_blank" rel="noopener">发热</a>、<a href="https://zh.wikipedia.org/wiki/%E8%82%BA%E7%82%8E" target="_blank" rel="noopener">肺炎</a>等症状<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-38" target="_blank" rel="noopener">[注 1]</a>在内的<a href="https://zh.wikipedia.org/wiki/%E4%BC%A0%E6%9F%93%E7%97%85" target="_blank" rel="noopener">传染病</a>流行引发的事件。<a href="https://zh.wikipedia.org/wiki/%E7%96%AB%E6%83%85" target="_blank" rel="noopener">疫情</a>最初被认为在<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9C%8B" target="_blank" rel="noopener">中华人民共和国</a><a href="https://zh.wikipedia.org/wiki/%E6%B9%96%E5%8C%97%E7%9C%81" target="_blank" rel="noopener">湖北省</a><a href="https://zh.wikipedia.org/wiki/%E6%AD%A6%E6%BC%A2%E5%B8%82" target="_blank" rel="noopener">武汉市</a><a href="https://zh.wikipedia.org/wiki/%E6%B1%9F%E6%BC%A2%E5%8D%80" target="_blank" rel="noopener">江汉区</a><a href="https://zh.wikipedia.org/wiki/%E6%AD%A6%E6%B1%89%E5%8D%8E%E5%8D%97%E6%B5%B7%E9%B2%9C%E6%89%B9%E5%8F%91%E5%B8%82%E5%9C%BA" target="_blank" rel="noopener">华南海鲜市场</a>爆发<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-:1-39" target="_blank" rel="noopener">[38]</a>，随后发现首宗及初期个案并非全部在此<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-applelancet-40" target="_blank" rel="noopener">[39]</a><a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-cablelancet-41" target="_blank" rel="noopener">[40]</a>。新型冠状病毒的传染来源尚未找到<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-rthk20200126-42" target="_blank" rel="noopener">[41]</a><a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-44" target="_blank" rel="noopener">[注 2]</a>，<a href="https://zh.wikipedia.org/wiki/%E4%BC%A0%E6%92%AD%E9%80%94%E5%BE%84" target="_blank" rel="noopener">传播途径</a>及扩散程度尚不明确<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-45" target="_blank" rel="noopener">[43]</a><a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-rthk1503910-36" target="_blank" rel="noopener">[36]</a>，<a href="https://zh.wikipedia.org/wiki/%E4%B8%96%E7%95%8C%E8%A1%9B%E7%94%9F%E7%B5%84%E7%B9%94" target="_blank" rel="noopener">世界卫生组织</a>及<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%9B%BD%E5%AE%B6%E5%8D%AB%E7%94%9F%E5%81%A5%E5%BA%B7%E5%A7%94%E5%91%98%E4%BC%9A" target="_blank" rel="noopener">中国国家卫生健康委员会</a>组织的专家相信，该病毒可以人传人<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-46" target="_blank" rel="noopener">[44]</a><a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-47" target="_blank" rel="noopener">[45]</a>，分析指<a href="https://zh.wikipedia.org/wiki/%E7%96%BE%E7%97%85%E6%BD%9C%E4%BC%8F%E6%9C%9F" target="_blank" rel="noopener">潜伏期</a>亦具传染性<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-latent-48" target="_blank" rel="noopener">[46]</a>。</p>
+<p>最早的已知病例出现于2019年12月1日<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-cablelancet-41" target="_blank" rel="noopener">[40]</a>。首个前往医院就诊病例的症状发生于12月8日<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-%E6%8A%A5%E9%81%930127A-49" target="_blank" rel="noopener">[47]</a>。12月下旬开始出现围绕到访华南海鲜市场的大量病例，共占到最初41人中的27例，然而有13人没有接触史<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-%E6%8A%A5%E9%81%930127A-49" target="_blank" rel="noopener">[47]</a>。2019年12月30日晚间，多份由武汉市卫健委于12月30日发出、有关“不明原因肺炎”的<a href="https://zh.wikipedia.org/wiki/File:%E5%85%B3%E4%BA%8E%E5%81%9A%E5%A5%BD%E4%B8%8D%E6%98%8E%E5%8E%9F%E5%9B%A0%E8%82%BA%E7%82%8E%E6%95%91%E6%B2%BB%E5%B7%A5%E4%BD%9C%E7%9A%84%E7%B4%A7%E6%80%A5%E9%80%9A%E7%9F%A5.pdf" target="_blank" rel="noopener">文件</a>在网上广传，武汉市疾控中心翌日向传媒证实文件属实，并开始向公众通报病例，指正在查证是何种肺炎<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-50" target="_blank" rel="noopener">[48]</a>。2020年1月7日晚上9时，专家检测出病毒为新型冠状病毒<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-51" target="_blank" rel="noopener">[49]</a>。1月13日起，<a href="https://zh.wikipedia.org/wiki/%E6%B3%B0%E5%9C%8B" target="_blank" rel="noopener">泰国</a>及<a href="https://zh.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC" target="_blank" rel="noopener">日本</a>等地陆续确认来自中国大陆的输出个案<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-52" target="_blank" rel="noopener">[50]</a><a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-japan1-53" target="_blank" rel="noopener">[51]</a>。由于邻近春节期间，大量人员已经流动至外省返乡，2020年1月中筛检试剂盒开始发放后，1月20日起，包括<a href="https://zh.wikipedia.org/wiki/%E5%B9%BF%E4%B8%9C%E7%9C%81" target="_blank" rel="noopener">广东</a>、<a href="https://zh.wikipedia.org/wiki/%E5%8C%97%E4%BA%AC%E5%B8%82" target="_blank" rel="noopener">北京</a>、<a href="https://zh.wikipedia.org/wiki/%E4%B8%8A%E6%B5%B7%E5%B8%82" target="_blank" rel="noopener">上海</a>等地，中国大陆除武汉外其他地区开始大量通报有确诊病例<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-bbc20200120-54" target="_blank" rel="noopener">[52]</a><a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-55" target="_blank" rel="noopener">[53]</a>，<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9C%8B%E5%B7%A5%E7%A8%8B%E9%99%A2" target="_blank" rel="noopener">中国工程院</a>院士<a href="https://zh.wikipedia.org/wiki/%E9%92%9F%E5%8D%97%E5%B1%B1" target="_blank" rel="noopener">钟南山</a>呼吁民众戴<a href="https://zh.wikipedia.org/wiki/%E5%8F%A3%E7%BD%A9" target="_blank" rel="noopener">口罩</a>及避免前往武汉<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-56" target="_blank" rel="noopener">[54]</a>，时任<a href="https://zh.wikipedia.org/wiki/%E6%AD%A6%E6%B1%89%E5%B8%82%E5%B8%82%E9%95%BF%E5%88%97%E8%A1%A8" target="_blank" rel="noopener">武汉市长</a><a href="https://zh.wikipedia.org/wiki/%E5%91%A8%E5%85%88%E6%97%BA" target="_blank" rel="noopener">周先旺</a>及中国国家卫健委亦先后呼吁民众不要进出武汉<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-57" target="_blank" rel="noopener">[55]</a><a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-58" target="_blank" rel="noopener">[56]</a>。不过<a href="https://zh.wikipedia.org/wiki/%E4%B8%96%E7%95%8C%E8%A1%9B%E7%94%9F%E7%B5%84%E7%B9%94" target="_blank" rel="noopener">世界卫生组织</a>表示因没有证据证明口罩能有效保护没有生病的人，故没有呼吸道症状的一般人无需戴口罩，不过可依据当地地区的文化习惯佩戴之<a href="https://zh.wikipedia.org/wiki/2019%EF%BC%8D2020%E5%B9%B4%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8B%80%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E%E4%BA%8B%E4%BB%B6#cite_note-59" target="_blank" rel="noopener">[57]</a>。</p>
+</blockquote>
+<p>update ：</p>
+<p>两个月过去了，国内的疫情基本上控制住来，但全球范围内在急剧扩张。疫情对各国经济和人民生活带来很大影响。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2020/01/01/newyear2020/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -620,7 +933,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-01T16:17:39+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-01T16:27:29+08:00">
                 2020-01-01
               </time>
             
@@ -1450,271 +1763,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2018/12/23/key-word-in-mind/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="观闻">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/23/key-word-in-mind/" itemprop="url">key-word-in-mind</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-23T19:07:00+08:00">
-                2018-12-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-01T16:17:39+08:00">
-                2020-01-01
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近，脑海中时常浮现出两个关键词：觉察、技术自信。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2018/07/25/chck/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="观闻">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/25/chck/" itemprop="url">诚惶诚恐</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-25T00:21:26+08:00">
-                2018-07-25
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-01T16:17:39+08:00">
-                2020-01-01
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>看今日之团队，“踉跄而行”，部分原因系吾之“不作为”，诚惶诚恐，百感交集。</p>
-<p>可做之事甚多。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1768,7 +1816,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
