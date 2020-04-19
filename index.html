@@ -273,6 +273,663 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="观闻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/16/GDC2020-Writing-Tools-Faster/" itemprop="url">GDC 2020 - Writing Tools Faster</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-16T09:33:58+08:00">
+                2020-04-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-19T15:34:12+08:00">
+                2020-04-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>这是GDC2020上的一个分享，主题是“更快速地开发工具，加速工具开发的设计决策”</p>
+<p>分享嘉宾是Niklas Gray，Our Machinery CTO</p>
+<p>源视频地址 <a href="https://www.youtube.com/watch?v=yYq_dviv1B0" target="_blank" rel="noopener">https://www.youtube.com/watch?v=yYq_dviv1B0</a></p>
+</blockquote>
+<h2 id="首先是分享嘉宾的自我介绍"><a href="#首先是分享嘉宾的自我介绍" class="headerlink" title="首先是分享嘉宾的自我介绍"></a>首先是分享嘉宾的自我介绍</h2><p>我叫Niklas Gray，我是写游戏引擎的；参与开发的引擎如下：</p>
+<ul>
+<li>Diesel ，游戏开发商Grin 内部用引擎，代表作有Ghost Recon(幽灵行动）和PayDay（收获日）</li>
+<li>Bitsquid ，一款商业引擎，代表作有Vermintide (末日鼠疫)和Helldivers（绝地战兵）</li>
+<li>Stingray ，AutoDesk在2014年收购来Bitsquid，Stingray是Bitsquid的更名版本</li>
+<li>The Machinery ，Niklas从2017年开始开发的新引擎，特性是Lightweight、Flexible、Modular and extensible</li>
+</ul>
+<h2 id="本次主题分享内容"><a href="#本次主题分享内容" class="headerlink" title="本次主题分享内容"></a>本次主题分享内容</h2><ul>
+<li>为什么工具开发这么难？</li>
+<li>我们能够做些什么</li>
+</ul>
+<h2 id="工具开发失败简史"><a href="#工具开发失败简史" class="headerlink" title="工具开发失败简史"></a>工具开发失败简史</h2><h3 id="Bitsquid-1-0"><a href="#Bitsquid-1-0" class="headerlink" title="Bitsquid 1.0"></a>Bitsquid 1.0</h3><ul>
+<li>引擎只定义文件格式，工具完全由用户自己开发，但用户其实并不想开发工具</li>
+</ul>
+<h3 id="Bitsquid-2-0"><a href="#Bitsquid-2-0" class="headerlink" title="Bitsquid 2.0"></a>Bitsquid 2.0</h3><ul>
+<li>决定使用WinForms快速的开发工具</li>
+<li>但WinFroms的UI非常丑陋</li>
+<li>由于没有清晰的规划，随着时间累积项目难以维护(不过对用户来说还是很好用的)</li>
+</ul>
+<h3 id="Bitsquid-3-0"><a href="#Bitsquid-3-0" class="headerlink" title="Bitsquid 3.0"></a>Bitsquid 3.0</h3><ul>
+<li>决定做出改变，在排序了几个UI库后，最终选择了看起来还不错的WPF</li>
+<li>但没想到工具开发时间变长了</li>
+<li>WPF和WinForms相比门槛变高，因为要了解WPF、XAML等…</li>
+<li>设想用WPF完全重写WinFroms工具，最终未能完成</li>
+</ul>
+<h3 id="Stingray"><a href="#Stingray" class="headerlink" title="Stingray"></a>Stingray</h3><ul>
+<li>希望开发平台无关的编辑器，这意味着不能使用WPF；考虑到可以购买一些Web技术和不少人有Web开发经验；最终决定开发一款Web编辑器</li>
+<li>但该技术选型的开发栈很长，涉及到C#, Lua, C++, WPF,WinForms, Chromium,Qt, JavaScript,Angular, WebSockets </li>
+<li>没想到开发工具的时间更长了</li>
+<li>基于web重写工具的设想又落空来</li>
+<li>最终结果是WinForms、WPF、Web各种工具同时存在，情况变得更加复杂</li>
+</ul>
+<h3 id="Bitsquid-Stingray-的核心问题"><a href="#Bitsquid-Stingray-的核心问题" class="headerlink" title="Bitsquid/Stingray 的核心问题"></a>Bitsquid/Stingray 的核心问题</h3><ul>
+<li>不断更改开发框架</li>
+<li>工具开发耗时长以至于无法完成</li>
+<li>工具运行时性能差劲</li>
+</ul>
+<p><strong>结果就是：非常差的工具！</strong></p>
+<p>那么我们是如何做出改变的？请继续往下看。</p>
+<h3 id="为什么改变开发框架"><a href="#为什么改变开发框架" class="headerlink" title="为什么改变开发框架"></a>为什么改变开发框架</h3><ul>
+<li>某种程度上，是决策错误</li>
+<li>某种程度上，是因为技术在不断变迁；继续使用过时的技术会非常痛苦</li>
+</ul>
+<h3 id="为什么工具开发会如此耗时"><a href="#为什么工具开发会如此耗时" class="headerlink" title="为什么工具开发会如此耗时"></a>为什么工具开发会如此耗时</h3><ul>
+<li>每一个小工具都要有UI，都要经过设计、编码和测试</li>
+<li>Undo, copy/paste, serialize, drag-and-drop 等特性实现起来比较耗时</li>
+<li><p>技术栈太长，难以理解</p>
+<ul>
+<li>当出现bug时，bug发生在Angular, JavaScript, WebSocket, Chromium, C#, Lua 还是C++? </li>
+<li>总之一切都很复杂</li>
+</ul>
+</li>
+<li>工具开发只能由某些人来做，当引擎工程师想要加个功能时，因为太复杂而无法独自完成</li>
+</ul>
+<h3 id="为什么会遇到性能问题"><a href="#为什么会遇到性能问题" class="headerlink" title="为什么会遇到性能问题"></a>为什么会遇到性能问题</h3><ul>
+<li>传统的web开发经验并不适用<ul>
+<li>常规Web开发一般不太关心性能</li>
+<li>游戏场景通常比较复杂，编辑器开发会更复杂</li>
+</ul>
+</li>
+<li>刚开始东西少，常规的web并没有遇到什么问题；但随着东西越来越多，很快性能就是要急需解决的问题。但这个时候已经不是通过profile找到热点、解决热点函数那么简单了。往往是需要对某个系统进行重写。</li>
+<li>过长的开发栈使得查问题变得非常困难</li>
+</ul>
+<h3 id="我们如何解决这些问题"><a href="#我们如何解决这些问题" class="headerlink" title="我们如何解决这些问题"></a>我们如何解决这些问题</h3><ul>
+<li>基于良好设计的数据模型，自动进行undo、redo、copy、paste</li>
+<li>简化技术栈<ul>
+<li>让事情更加明显、容易理解</li>
+<li>避免更改开发框架</li>
+<li>控制好性能</li>
+</ul>
+</li>
+<li>基于数据自动生成UI并重用UI<ul>
+<li>Properties, Tree, Graph 等</li>
+<li>不用再为创建UI做很多工作</li>
+</ul>
+</li>
+</ul>
+<h2 id="新的数据模型"><a href="#新的数据模型" class="headerlink" title="新的数据模型"></a>新的数据模型</h2><h3 id="The-Truth"><a href="#The-Truth" class="headerlink" title="The Truth"></a>The Truth</h3><ul>
+<li><p>用统一的方式描述所有数据</p>
+</li>
+<li><p>基于数据模型定义Undo这样的操作</p>
+</li>
+<li><p>每一个对象都有类型和属性</p>
+<p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587267799367.png" alt="1587267799367"></p>
+<blockquote>
+<p>注：the truth是Machinery引擎底层数据模型。<a href="https://ourmachinery.com/post/the-story-behind-the-truth-designing-a-data-model/" target="_blank" rel="noopener">here</a>可以了解背后故事</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="多线程无锁访问"><a href="#多线程无锁访问" class="headerlink" title="多线程无锁访问"></a>多线程无锁访问</h3><ul>
+<li><p>改变数据分成两个步骤：write、commit</p>
+</li>
+<li><p>写时复制</p>
+</li>
+<li><p>读时不必加锁</p>
+<p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587268067315.png" alt="1587268067315"></p>
+</li>
+</ul>
+<h3 id="Undo"><a href="#Undo" class="headerlink" title="Undo"></a>Undo</h3><ul>
+<li><p>On Commit时，将新旧object保存在undo scope</p>
+</li>
+<li><p>On Undo时，恢复旧object</p>
+</li>
+<li><p>undo scope可以保存不同object的多次更改</p>
+<p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587275528768.png" alt="1587275528768"></p>
+</li>
+</ul>
+<h3 id="Prefabs-Prototypes"><a href="#Prefabs-Prototypes" class="headerlink" title="Prefabs/Prototypes"></a>Prefabs/Prototypes</h3><p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587275606065.png" alt="1587275643566"></p>
+<h3 id="Live-Collaboration"><a href="#Live-Collaboration" class="headerlink" title="Live Collaboration"></a>Live Collaboration</h3><p>支持多人实时协作同一个工程</p>
+<h3 id="The-Truth-Pros-amp-Cons"><a href="#The-Truth-Pros-amp-Cons" class="headerlink" title="The Truth: Pros &amp; Cons"></a>The Truth: Pros &amp; Cons</h3><p>优点</p>
+<ul>
+<li>提供了很多基础功能，如undo、redo、copy、paste</li>
+<li>甚至一些高级功能，如实时协作和原型设计</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>有些数据并不适合用key-value format</li>
+<li>这套系统很复杂且处于中心位置<ul>
+<li>没有简单的方式提供给其他系统使用</li>
+<li>修改会导致复杂度骤增</li>
+</ul>
+</li>
+</ul>
+<h2 id="简化技术栈"><a href="#简化技术栈" class="headerlink" title="简化技术栈"></a>简化技术栈</h2><h3 id="我们的技术栈"><a href="#我们的技术栈" class="headerlink" title="我们的技术栈"></a>我们的技术栈</h3><ul>
+<li>所有代码都用C语言编写</li>
+<li>外部依赖非常少</li>
+</ul>
+<p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587273271561.png" alt="1587273271561"></p>
+<h3 id="Draw-2D-2DUI库"><a href="#Draw-2D-2DUI库" class="headerlink" title="Draw 2D: 2DUI库"></a>Draw 2D: 2DUI库</h3><ul>
+<li>函数：stroke_rect(), fill_rect()</li>
+<li>直接将数据写入到vertex buffer和index buffer</li>
+<li>所有UI在一个drawcall内绘制，详细介绍可参考<a href="https://ourmachinery.com/post/ui-rendering-using-primitive-buffers/" target="_blank" rel="noopener">here</a></li>
+</ul>
+<h3 id="Draw-2D-Clipping"><a href="#Draw-2D-Clipping" class="headerlink" title="Draw 2D: Clipping"></a>Draw 2D: Clipping</h3><ul>
+<li>裁剪矩形被写入到vertex buffer</li>
+<li>实现了gpu裁剪，在PS中基于裁剪矩形做裁剪</li>
+</ul>
+<h3 id="Draw-2D-Overlays"><a href="#Draw-2D-Overlays" class="headerlink" title="Draw 2D: Overlays"></a>Draw 2D: Overlays</h3><p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587277585876.png" alt="1587277585876"></p>
+<h3 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h3><ul>
+<li>立即模式UI，没有UI对象的创建和释放</li>
+<li>所有UI和交互处理都在一个drawcall内完成</li>
+<li>所有控件都会在每帧绘制一次</li>
+<li>控件不会被永久保存，通过ID识别不同控件</li>
+</ul>
+<h3 id="IMGUI-Pros-amp-Cons"><a href="#IMGUI-Pros-amp-Cons" class="headerlink" title="IMGUI: Pros &amp; Cons"></a>IMGUI: Pros &amp; Cons</h3><ul>
+<li>More straightforward code flow (debugging, profiling)</li>
+<li>No need to synchronize state</li>
+<li>Redraw every frame – expensive?<ul>
+<li>Viewport typically wants to render every frame anyway</li>
+<li>Can do it just on mouse/keyboard events</li>
+<li>Easy to match performance to what is shown on screen</li>
+</ul>
+</li>
+<li>New mindset: no objects to talk to<ul>
+<li>Can usually find ways around it </li>
+</ul>
+</li>
+</ul>
+<p>（接下来一部分介绍来IMGUI模式遇到的问题以及他们的解决思路，这里略去细节…）</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>优点</p>
+<ul>
+<li>开发栈完全可控，更易于理解和调试</li>
+<li>所有地方都使用相同的API，这样工具程序和其他程序之间就不存在什么障碍壁垒；任何人都可以把事情做好</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>你需要从零开始构建(大概6人月的工作量)<ul>
+<li>前期投入很快就会收回</li>
+<li>你也可以直接使用Dear IMGUI</li>
+</ul>
+</li>
+<li>需要考虑很多设计决策</li>
+<li>IMGUI需要新的思维模式</li>
+</ul>
+<h2 id="UI生成"><a href="#UI生成" class="headerlink" title="UI生成"></a>UI生成</h2><p>Motivation </p>
+<ul>
+<li>减少创建UI的工作</li>
+</ul>
+<p>(Niklas给了几个参考图和一些示例代码，就不在这里罗列了,详见视频…)</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ul>
+<li>创建UI更快了，进度不再被UI任务阻塞</li>
+<li>引擎开发由两个人在两年内完成</li>
+<li>数据模型看起来很酷但也可怕，因为没增加一项就会导致更复杂</li>
+<li>Aspects 用来自定义数据行为，是一种非常棒的方式</li>
+<li>独自一人去实现这些功能是一项非常大的工作</li>
+<li>创建工具集需要很多”functional design” </li>
+<li>我们也牺牲来一些特性，如文字自右向左排列</li>
+</ul>
+<p><strong>All-in-all we’re happy with the direction .</strong></p>
+<h2 id="观后感"><a href="#观后感" class="headerlink" title="观后感"></a>观后感</h2><ol>
+<li>从历史中总结经验教训，使用IMGUI提高了Niklas他们的工具开发效率</li>
+<li>The Truth数据模型在Machinery引擎处于中心位置，为工具开发提供来很多遍历功能；但同时因增加项而变得更加复杂；进而导致难以维护</li>
+<li>视频中提到的很多历史问题，其实我们也都遇到过</li>
+<li>要向大佬们学习，善于总结和改进</li>
+<li>IMGUI和RMGUI的争论在网上就有很多，抛开具体场景谈好坏都是耍流氓</li>
+<li>Machinery引擎还在开发中，目前刚发布了beta版本；但仅限于内测。为进一步学习和了解，两天前我发邮件申请加入内测，暂未得到回复</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2020/04/12/gamma/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="观闻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/12/gamma/" itemprop="url">Gamma</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-12T20:50:19+08:00">
+                2020-04-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-14T08:21:04+08:00">
+                2020-04-14
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="我们为什么能看见这个世界"><a href="#我们为什么能看见这个世界" class="headerlink" title="我们为什么能看见这个世界"></a>我们为什么能看见这个世界</h3><p>光照方程是对真实世界的近似模拟，真实世界中光沿直线传播，经过物体反射和折射进入人眼，经由人眼中多种视锥细胞形成视觉信号，这些信号复合后为人呈现了色彩缤纷的世界。</p>
+<h3 id="光的可见性度量"><a href="#光的可见性度量" class="headerlink" title="光的可见性度量"></a>光的可见性度量</h3><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>作用</th>
+<th>单位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Luminous Flux(光通量)</td>
+<td>measures the total amount of power of visible light emitted from the light source（度量从光源发出的可见光）</td>
+<td>lumen</td>
+</tr>
+<tr>
+<td>luminous intensity(光强)</td>
+<td>luminous flux per unit solid angle（单位立体角光通量）</td>
+<td>lumen/sr, or candela</td>
+</tr>
+<tr>
+<td>illuminance（亮度）</td>
+<td>luminous flux per unit area（单位面积接收的光通量）</td>
+<td>lumen/m^2, or lux</td>
+</tr>
+<tr>
+<td>Luminance（照度）</td>
+<td>measure of how much light can be detected by our eyes looking at a surface at a particular angle. The formal definition of luminance is luminous flux per unit solid angle per unit area.（单位面积单位立体角人眼接收到的光通量）</td>
+<td>lumen/(m^2·sr), or cd/m^2.</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/2020/04/12/gamma/luminance6.png" alt="_config.yml"><a href="http://6degreesoffreedom.co/images/luminance6.png" target="_blank" rel="noopener">图片来源</a></p>
+<h3 id="什么是gamma"><a href="#什么是gamma" class="headerlink" title="什么是gamma"></a>什么是gamma</h3><p>v<sub>out</sub>=v<sub>in</sub><sup>gamma</sup></p>
+<p>首先，gamma是系数；是描述输入和输出之间关系的一个系数。可以用于描述物理世界可见光量和人脑接收到的可见光信号量之间的一个系数。在物理世界中，两倍的光量会产生两倍的亮度，也就是说呈线性关系。但人脑接收到的可见光信号量不是线性关系，而是幂次方关系。</p>
+<p><img src="https://cdn.cambridgeincolour.com/images/tutorials/gamma_chart1e.png" alt="linear vs nonlinear gamma - cameras vs human eyes"></p>
+<p><a href="https://cdn.cambridgeincolour.com/images/tutorials/gamma_chart1e.png" target="_blank" rel="noopener">图片来源</a></p>
+<p>当gamma等于1时称之为linear gamma，当gamma小于1时称之为gamma encoding或gamma compression；当gamma大于1时称之为gamma decoding。</p>
+<p>但通常会使用大小等于2.2的gamma。为什么是2.2呢，因为这刚好是人脑接收到的可见光信号量幂次关系的逆。</p>
+<p><img src="https://learnopengl-cn.github.io/img/05/02/gamma_correction_gamma_curves.png" alt="img"></p>
+<p><a href="https://learnopengl-cn.github.io/img/05/02/gamma_correction_gamma_curves.png" target="_blank" rel="noopener">图片来源</a></p>
+<p>计算机上最早的显示器是CRT显示器，由于硬件特性两倍的电压并不能产生两个的亮度。电压与亮度关系呈2.2幂次方关系；经人眼视锥细胞识别最终形成的可见光信号量在传递给大脑后，刚好又变成了线性关系。</p>
+<h3 id="为什么gamma难以理解"><a href="#为什么gamma难以理解" class="headerlink" title="为什么gamma难以理解"></a>为什么gamma难以理解</h3><p>因为生产图片、图片加载处理、观察图片这几个过程跨越了时间和空间，只有在一种约定好的方式下工作才能获得理想结果。简单来说就是工作流比较长，而这些工作流之间又有约束，这是导致gamma难以理解的原因。</p>
+<h3 id="从工作流看gamma"><a href="#从工作流看gamma" class="headerlink" title="从工作流看gamma"></a>从工作流看gamma</h3><p><img src="/2020/04/12/gamma/1586820052900.png" alt="1586821388623"></p>
+<p>我们从右往左看上图：</p>
+<p><strong>5视觉形成</strong></p>
+<p>人眼中视锥细胞接收物体表面反射的光线形成信号，最终传给大脑进行解析。由于生理特性的原因视觉信号并不是线性关系。这是由人的生理特性决定的。也是我们希望呈现的结果。</p>
+<p><strong>4显示器显示</strong></p>
+<p>早期用于电脑的显示器是CRT显示器，该显示器的特性是会产生非线性的电子信号。由于CRT的衰减特性和人眼的增强特性，最终结果刚好线性的。后来的显示器保留来衰减计算，我们可通过修改现实器配置调整gamma数值。</p>
+<p><strong>3光照计算</strong></p>
+<p>光照计算是对物理世界的近似模式，光照计算也要在线性空间下进行。但因为显示器的衰减特性，要进行gamma 补偿计算。</p>
+<p><strong>2图片加载</strong></p>
+<p>因为光照计算要在线性空间进行，而图片通常是sRGB空间（非线性），所以在贴图加载完后要转到线性空间。</p>
+<p><strong>1图片生产</strong></p>
+<p>美工进行计算机绘图并保存在磁盘上，磁盘上的贴图通常是在sRGB空间；但这不是必须的，美工可以在导出图片时选择保存的格式。另一种就是用相机拍照，相机的感光元件是电子器件，对光线的处理是线性的；但为了适应整个工作流，通常是保存为非线性的sRGB。使用sRGB图片的好处是可以保存更多对我们视觉有效的信息。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>以前总是站在某一个特定过程去理解gamma，结果就总是似懂非懂。当从整个工作流去理解gamma后就容易多了。</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="http://6degreesoffreedom.co/luminance-vs-illuminance/" target="_blank" rel="noopener">http://6degreesoffreedom.co/luminance-vs-illuminance/</a></p>
+<p><a href="https://www.cambridgeincolour.com/tutorials/gamma-correction.htm" target="_blank" rel="noopener">https://www.cambridgeincolour.com/tutorials/gamma-correction.htm</a></p>
+<p><a href="https://learnopengl.com/Advanced-Lighting/Gamma-Correction" target="_blank" rel="noopener">https://learnopengl.com/Advanced-Lighting/Gamma-Correction</a></p>
+<p><a href="https://learnopengl-cn.github.io/05%20Advanced%20Lighting/02%20Gamma%20Correction/" target="_blank" rel="noopener">https://learnopengl-cn.github.io/05%20Advanced%20Lighting/02%20Gamma%20Correction/</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E8%A7%86%E9%94%A5%E7%BB%86%E8%83%9E" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/%E8%A7%86%E9%94%A5%E7%BB%86%E8%83%9E</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2020/04/07/just-do-it/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="观闻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/07/just-do-it/" itemprop="url">just-do-it</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-07T08:09:49+08:00">
+                2020-04-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-07T08:25:16+08:00">
+                2020-04-07
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>与其徘徊犹豫，不如奋起直追。先相信再看见，相信“相信”的力量。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2020/04/05/lighting-shading/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1359,438 +2016,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2019/09/29/computer-boost/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="观闻">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/computer-boost/" itemprop="url">实模式计算机启动过程</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-29T12:01:01+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-04-01T07:08:31+08:00">
-                2020-04-01
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/2019/09/29/computer-boost/1572177658693.png" alt="内存结构"></p>
-<ol>
-<li>加电、复位，重置寄存器。此时CS:IP=FFFF:0000</li>
-<li>执行jmp 0xF000:0xe05b,进入到ROM BIOS</li>
-<li>ROM BIOS执行以下操作<ul>
-<li>硬件诊断、检测</li>
-<li>读取主引导扇区（0面0柱1扇区），并加载到0x0000：0x7c00</li>
-<li>jmp 0x0000：0x7c00</li>
-</ul>
-</li>
-<li>主引导扇区程序加载用户程序并跳转到用户程序</li>
-<li>执行用户程序逻辑</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2019/02/14/the-step-use-livekd/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="观闻">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/14/the-step-use-livekd/" itemprop="url">使用livekd的步骤</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T08:31:15+08:00">
-                2019-02-14
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-04-01T07:08:31+08:00">
-                2020-04-01
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Step1"><a href="#Step1" class="headerlink" title="Step1"></a>Step1</h2><p>下载sysinternal</p>
-<p>下载Windows SDK</p>
-<h2 id="Step2"><a href="#Step2" class="headerlink" title="Step2"></a>Step2</h2><p>将livekd拷贝到windbg所在目录下</p>
-<p>将windbg所在目录添加到系统环境变量中</p>
-<h2 id="Step3"><a href="#Step3" class="headerlink" title="Step3"></a>Step3</h2><p>使用管理员权限打开cmd</p>
-<p>livekd </p>
-<p><img src="/2019/02/14/the-step-use-livekd/1550104738494.png" alt="1550104738494"></p>
-<p>livekd -w</p>
-<p><img src="/2019/02/14/the-step-use-livekd/1550104825217.png" alt="1550104825217"></p>
-<p>如果已经打开了一个内核调试，当再次打开时会遇到以下错误</p>
-<p><img src="/2019/02/14/the-step-use-livekd/1550105092617.png" alt="1550105092617"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2019/01/31/coaching-for-performance/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="观闻">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/coaching-for-performance/" itemprop="url">高绩效教练</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T23:06:08+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-04-01T07:08:31+08:00">
-                2020-04-01
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在辉哥奇谭公众号中了解到该书，粗读了一遍。</p>
-<blockquote>
-<p>教练的基本理念是：世界上不存在无能的人</p>
-<p>教练的目标是客户的行为改变</p>
-<p>教练工作的重点是培养客户的觉察力、责任感和自信心</p>
-</blockquote>
-<p>我个人的看法是，使用教练技术总体来说是好的；但是在团队中普遍使用很难。原因是我们往往面临着交付压力，要在一定的时间内提交高质量的物件；教练技术主要是一个培养的过程，这个过程可能会很长久。这就和交付时间产生了冲突。同时，也因为自我认知的局限性，执行人员往往会比较排斥开放式提问。因此，从团队快速拿到结果(高效)的角度来看，大多时候会选择告诉执行人员答案和方法，而不是通过开放性的提问去引导。</p>
-<p>教练技术适合于有自我提高的人，这类人往往是团队中的领导。</p>
-<p>教练技术适合于教育培养小孩，小孩的成长过程是长期的，是值得投入时间的。</p>
-<p>当然，我是很认同教练理念的。我会再仔细阅读一次，希望教练技术能够助力自我成长和团队成长。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1839,7 +2069,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

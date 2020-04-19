@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C++" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="这是GDC2020上的一个分享，主题是“更快速地开发工具，加速工具开发的设计决策” 分享嘉宾是Niklas Gray，Our Machinery CTO 源视频地址 https://www.youtube.com/watch?v=yYq_dviv1B0  首先是分享嘉宾的自我介绍我叫Niklas Gray，我是写游戏引擎的；参与开发的引擎如下：  Diesel ，游戏开发商Grin 内部用引擎，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GDC 2020 - Writing Tools Faster">
+<meta property="og:url" content="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/index.html">
+<meta property="og:site_name" content="观闻">
+<meta property="og:description" content="这是GDC2020上的一个分享，主题是“更快速地开发工具，加速工具开发的设计决策” 分享嘉宾是Niklas Gray，Our Machinery CTO 源视频地址 https://www.youtube.com/watch?v=yYq_dviv1B0  首先是分享嘉宾的自我介绍我叫Niklas Gray，我是写游戏引擎的；参与开发的引擎如下：  Diesel ，游戏开发商Grin 内部用引擎，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/1587267799367.png">
+<meta property="og:image" content="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/1587268067315.png">
+<meta property="og:image" content="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/1587275528768.png">
+<meta property="og:image" content="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/1587275606065.png">
+<meta property="og:image" content="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/1587273271561.png">
+<meta property="og:image" content="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/1587277585876.png">
+<meta property="og:updated_time" content="2020-04-19T07:34:12.620Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GDC 2020 - Writing Tools Faster">
+<meta name="twitter:description" content="这是GDC2020上的一个分享，主题是“更快速地开发工具，加速工具开发的设计决策” 分享嘉宾是Niklas Gray，Our Machinery CTO 源视频地址 https://www.youtube.com/watch?v=yYq_dviv1B0  首先是分享嘉宾的自我介绍我叫Niklas Gray，我是写游戏引擎的；参与开发的引擎如下：  Diesel ，游戏开发商Grin 内部用引擎，">
+<meta name="twitter:image" content="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/1587267799367.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/"/>
+
+
+
+
+
+  <title>GDC 2020 - Writing Tools Faster | 观闻</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">观闻</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="观闻">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">GDC 2020 - Writing Tools Faster</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-16T09:33:58+08:00">
+                2020-04-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-19T15:34:12+08:00">
+                2020-04-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>这是GDC2020上的一个分享，主题是“更快速地开发工具，加速工具开发的设计决策”</p>
+<p>分享嘉宾是Niklas Gray，Our Machinery CTO</p>
+<p>源视频地址 <a href="https://www.youtube.com/watch?v=yYq_dviv1B0" target="_blank" rel="noopener">https://www.youtube.com/watch?v=yYq_dviv1B0</a></p>
+</blockquote>
+<h2 id="首先是分享嘉宾的自我介绍"><a href="#首先是分享嘉宾的自我介绍" class="headerlink" title="首先是分享嘉宾的自我介绍"></a>首先是分享嘉宾的自我介绍</h2><p>我叫Niklas Gray，我是写游戏引擎的；参与开发的引擎如下：</p>
+<ul>
+<li>Diesel ，游戏开发商Grin 内部用引擎，代表作有Ghost Recon(幽灵行动）和PayDay（收获日）</li>
+<li>Bitsquid ，一款商业引擎，代表作有Vermintide (末日鼠疫)和Helldivers（绝地战兵）</li>
+<li>Stingray ，AutoDesk在2014年收购来Bitsquid，Stingray是Bitsquid的更名版本</li>
+<li>The Machinery ，Niklas从2017年开始开发的新引擎，特性是Lightweight、Flexible、Modular and extensible</li>
+</ul>
+<h2 id="本次主题分享内容"><a href="#本次主题分享内容" class="headerlink" title="本次主题分享内容"></a>本次主题分享内容</h2><ul>
+<li>为什么工具开发这么难？</li>
+<li>我们能够做些什么</li>
+</ul>
+<h2 id="工具开发失败简史"><a href="#工具开发失败简史" class="headerlink" title="工具开发失败简史"></a>工具开发失败简史</h2><h3 id="Bitsquid-1-0"><a href="#Bitsquid-1-0" class="headerlink" title="Bitsquid 1.0"></a>Bitsquid 1.0</h3><ul>
+<li>引擎只定义文件格式，工具完全由用户自己开发，但用户其实并不想开发工具</li>
+</ul>
+<h3 id="Bitsquid-2-0"><a href="#Bitsquid-2-0" class="headerlink" title="Bitsquid 2.0"></a>Bitsquid 2.0</h3><ul>
+<li>决定使用WinForms快速的开发工具</li>
+<li>但WinFroms的UI非常丑陋</li>
+<li>由于没有清晰的规划，随着时间累积项目难以维护(不过对用户来说还是很好用的)</li>
+</ul>
+<h3 id="Bitsquid-3-0"><a href="#Bitsquid-3-0" class="headerlink" title="Bitsquid 3.0"></a>Bitsquid 3.0</h3><ul>
+<li>决定做出改变，在排序了几个UI库后，最终选择了看起来还不错的WPF</li>
+<li>但没想到工具开发时间变长了</li>
+<li>WPF和WinForms相比门槛变高，因为要了解WPF、XAML等…</li>
+<li>设想用WPF完全重写WinFroms工具，最终未能完成</li>
+</ul>
+<h3 id="Stingray"><a href="#Stingray" class="headerlink" title="Stingray"></a>Stingray</h3><ul>
+<li>希望开发平台无关的编辑器，这意味着不能使用WPF；考虑到可以购买一些Web技术和不少人有Web开发经验；最终决定开发一款Web编辑器</li>
+<li>但该技术选型的开发栈很长，涉及到C#, Lua, C++, WPF,WinForms, Chromium,Qt, JavaScript,Angular, WebSockets </li>
+<li>没想到开发工具的时间更长了</li>
+<li>基于web重写工具的设想又落空来</li>
+<li>最终结果是WinForms、WPF、Web各种工具同时存在，情况变得更加复杂</li>
+</ul>
+<h3 id="Bitsquid-Stingray-的核心问题"><a href="#Bitsquid-Stingray-的核心问题" class="headerlink" title="Bitsquid/Stingray 的核心问题"></a>Bitsquid/Stingray 的核心问题</h3><ul>
+<li>不断更改开发框架</li>
+<li>工具开发耗时长以至于无法完成</li>
+<li>工具运行时性能差劲</li>
+</ul>
+<p><strong>结果就是：非常差的工具！</strong></p>
+<p>那么我们是如何做出改变的？请继续往下看。</p>
+<h3 id="为什么改变开发框架"><a href="#为什么改变开发框架" class="headerlink" title="为什么改变开发框架"></a>为什么改变开发框架</h3><ul>
+<li>某种程度上，是决策错误</li>
+<li>某种程度上，是因为技术在不断变迁；继续使用过时的技术会非常痛苦</li>
+</ul>
+<h3 id="为什么工具开发会如此耗时"><a href="#为什么工具开发会如此耗时" class="headerlink" title="为什么工具开发会如此耗时"></a>为什么工具开发会如此耗时</h3><ul>
+<li>每一个小工具都要有UI，都要经过设计、编码和测试</li>
+<li>Undo, copy/paste, serialize, drag-and-drop 等特性实现起来比较耗时</li>
+<li><p>技术栈太长，难以理解</p>
+<ul>
+<li>当出现bug时，bug发生在Angular, JavaScript, WebSocket, Chromium, C#, Lua 还是C++? </li>
+<li>总之一切都很复杂</li>
+</ul>
+</li>
+<li>工具开发只能由某些人来做，当引擎工程师想要加个功能时，因为太复杂而无法独自完成</li>
+</ul>
+<h3 id="为什么会遇到性能问题"><a href="#为什么会遇到性能问题" class="headerlink" title="为什么会遇到性能问题"></a>为什么会遇到性能问题</h3><ul>
+<li>传统的web开发经验并不适用<ul>
+<li>常规Web开发一般不太关心性能</li>
+<li>游戏场景通常比较复杂，编辑器开发会更复杂</li>
+</ul>
+</li>
+<li>刚开始东西少，常规的web并没有遇到什么问题；但随着东西越来越多，很快性能就是要急需解决的问题。但这个时候已经不是通过profile找到热点、解决热点函数那么简单了。往往是需要对某个系统进行重写。</li>
+<li>过长的开发栈使得查问题变得非常困难</li>
+</ul>
+<h3 id="我们如何解决这些问题"><a href="#我们如何解决这些问题" class="headerlink" title="我们如何解决这些问题"></a>我们如何解决这些问题</h3><ul>
+<li>基于良好设计的数据模型，自动进行undo、redo、copy、paste</li>
+<li>简化技术栈<ul>
+<li>让事情更加明显、容易理解</li>
+<li>避免更改开发框架</li>
+<li>控制好性能</li>
+</ul>
+</li>
+<li>基于数据自动生成UI并重用UI<ul>
+<li>Properties, Tree, Graph 等</li>
+<li>不用再为创建UI做很多工作</li>
+</ul>
+</li>
+</ul>
+<h2 id="新的数据模型"><a href="#新的数据模型" class="headerlink" title="新的数据模型"></a>新的数据模型</h2><h3 id="The-Truth"><a href="#The-Truth" class="headerlink" title="The Truth"></a>The Truth</h3><ul>
+<li><p>用统一的方式描述所有数据</p>
+</li>
+<li><p>基于数据模型定义Undo这样的操作</p>
+</li>
+<li><p>每一个对象都有类型和属性</p>
+<p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587267799367.png" alt="1587267799367"></p>
+<blockquote>
+<p>注：the truth是Machinery引擎底层数据模型。<a href="https://ourmachinery.com/post/the-story-behind-the-truth-designing-a-data-model/" target="_blank" rel="noopener">here</a>可以了解背后故事</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="多线程无锁访问"><a href="#多线程无锁访问" class="headerlink" title="多线程无锁访问"></a>多线程无锁访问</h3><ul>
+<li><p>改变数据分成两个步骤：write、commit</p>
+</li>
+<li><p>写时复制</p>
+</li>
+<li><p>读时不必加锁</p>
+<p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587268067315.png" alt="1587268067315"></p>
+</li>
+</ul>
+<h3 id="Undo"><a href="#Undo" class="headerlink" title="Undo"></a>Undo</h3><ul>
+<li><p>On Commit时，将新旧object保存在undo scope</p>
+</li>
+<li><p>On Undo时，恢复旧object</p>
+</li>
+<li><p>undo scope可以保存不同object的多次更改</p>
+<p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587275528768.png" alt="1587275528768"></p>
+</li>
+</ul>
+<h3 id="Prefabs-Prototypes"><a href="#Prefabs-Prototypes" class="headerlink" title="Prefabs/Prototypes"></a>Prefabs/Prototypes</h3><p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587275606065.png" alt="1587275643566"></p>
+<h3 id="Live-Collaboration"><a href="#Live-Collaboration" class="headerlink" title="Live Collaboration"></a>Live Collaboration</h3><p>支持多人实时协作同一个工程</p>
+<h3 id="The-Truth-Pros-amp-Cons"><a href="#The-Truth-Pros-amp-Cons" class="headerlink" title="The Truth: Pros &amp; Cons"></a>The Truth: Pros &amp; Cons</h3><p>优点</p>
+<ul>
+<li>提供了很多基础功能，如undo、redo、copy、paste</li>
+<li>甚至一些高级功能，如实时协作和原型设计</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>有些数据并不适合用key-value format</li>
+<li>这套系统很复杂且处于中心位置<ul>
+<li>没有简单的方式提供给其他系统使用</li>
+<li>修改会导致复杂度骤增</li>
+</ul>
+</li>
+</ul>
+<h2 id="简化技术栈"><a href="#简化技术栈" class="headerlink" title="简化技术栈"></a>简化技术栈</h2><h3 id="我们的技术栈"><a href="#我们的技术栈" class="headerlink" title="我们的技术栈"></a>我们的技术栈</h3><ul>
+<li>所有代码都用C语言编写</li>
+<li>外部依赖非常少</li>
+</ul>
+<p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587273271561.png" alt="1587273271561"></p>
+<h3 id="Draw-2D-2DUI库"><a href="#Draw-2D-2DUI库" class="headerlink" title="Draw 2D: 2DUI库"></a>Draw 2D: 2DUI库</h3><ul>
+<li>函数：stroke_rect(), fill_rect()</li>
+<li>直接将数据写入到vertex buffer和index buffer</li>
+<li>所有UI在一个drawcall内绘制，详细介绍可参考<a href="https://ourmachinery.com/post/ui-rendering-using-primitive-buffers/" target="_blank" rel="noopener">here</a></li>
+</ul>
+<h3 id="Draw-2D-Clipping"><a href="#Draw-2D-Clipping" class="headerlink" title="Draw 2D: Clipping"></a>Draw 2D: Clipping</h3><ul>
+<li>裁剪矩形被写入到vertex buffer</li>
+<li>实现了gpu裁剪，在PS中基于裁剪矩形做裁剪</li>
+</ul>
+<h3 id="Draw-2D-Overlays"><a href="#Draw-2D-Overlays" class="headerlink" title="Draw 2D: Overlays"></a>Draw 2D: Overlays</h3><p><img src="/2020/04/16/GDC2020-Writing-Tools-Faster/1587277585876.png" alt="1587277585876"></p>
+<h3 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h3><ul>
+<li>立即模式UI，没有UI对象的创建和释放</li>
+<li>所有UI和交互处理都在一个drawcall内完成</li>
+<li>所有控件都会在每帧绘制一次</li>
+<li>控件不会被永久保存，通过ID识别不同控件</li>
+</ul>
+<h3 id="IMGUI-Pros-amp-Cons"><a href="#IMGUI-Pros-amp-Cons" class="headerlink" title="IMGUI: Pros &amp; Cons"></a>IMGUI: Pros &amp; Cons</h3><ul>
+<li>More straightforward code flow (debugging, profiling)</li>
+<li>No need to synchronize state</li>
+<li>Redraw every frame – expensive?<ul>
+<li>Viewport typically wants to render every frame anyway</li>
+<li>Can do it just on mouse/keyboard events</li>
+<li>Easy to match performance to what is shown on screen</li>
+</ul>
+</li>
+<li>New mindset: no objects to talk to<ul>
+<li>Can usually find ways around it </li>
+</ul>
+</li>
+</ul>
+<p>（接下来一部分介绍来IMGUI模式遇到的问题以及他们的解决思路，这里略去细节…）</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>优点</p>
+<ul>
+<li>开发栈完全可控，更易于理解和调试</li>
+<li>所有地方都使用相同的API，这样工具程序和其他程序之间就不存在什么障碍壁垒；任何人都可以把事情做好</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>你需要从零开始构建(大概6人月的工作量)<ul>
+<li>前期投入很快就会收回</li>
+<li>你也可以直接使用Dear IMGUI</li>
+</ul>
+</li>
+<li>需要考虑很多设计决策</li>
+<li>IMGUI需要新的思维模式</li>
+</ul>
+<h2 id="UI生成"><a href="#UI生成" class="headerlink" title="UI生成"></a>UI生成</h2><p>Motivation </p>
+<ul>
+<li>减少创建UI的工作</li>
+</ul>
+<p>(Niklas给了几个参考图和一些示例代码，就不在这里罗列了,详见视频…)</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ul>
+<li>创建UI更快了，进度不再被UI任务阻塞</li>
+<li>引擎开发由两个人在两年内完成</li>
+<li>数据模型看起来很酷但也可怕，因为没增加一项就会导致更复杂</li>
+<li>Aspects 用来自定义数据行为，是一种非常棒的方式</li>
+<li>独自一人去实现这些功能是一项非常大的工作</li>
+<li>创建工具集需要很多”functional design” </li>
+<li>我们也牺牲来一些特性，如文字自右向左排列</li>
+</ul>
+<p><strong>All-in-all we’re happy with the direction .</strong></p>
+<h2 id="观后感"><a href="#观后感" class="headerlink" title="观后感"></a>观后感</h2><ol>
+<li>从历史中总结经验教训，使用IMGUI提高了Niklas他们的工具开发效率</li>
+<li>The Truth数据模型在Machinery引擎处于中心位置，为工具开发提供来很多遍历功能；但同时因增加项而变得更加复杂；进而导致难以维护</li>
+<li>视频中提到的很多历史问题，其实我们也都遇到过</li>
+<li>要向大佬们学习，善于总结和改进</li>
+<li>IMGUI和RMGUI的争论在网上就有很多，抛开具体场景谈好坏都是耍流氓</li>
+<li>Machinery引擎还在开发中，目前刚发布了beta版本；但仅限于内测。为进一步学习和了解，两天前我发邮件申请加入内测，暂未得到回复</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/" title="GDC 2020 - Writing Tools Faster">http://gdlinklock.github.com/2020/04/16/GDC2020-Writing-Tools-Faster/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/12/gamma/" rel="next" title="Gamma">
+                <i class="fa fa-chevron-left"></i> Gamma
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="M3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/uploads/avatar.png"
+              alt="" />
+          
+            <p class="site-author-name" itemprop="name"></p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i></a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:gdlinklock@hotmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-hotmail"></i></a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先是分享嘉宾的自我介绍"><span class="nav-number">1.</span> <span class="nav-text">首先是分享嘉宾的自我介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本次主题分享内容"><span class="nav-number">2.</span> <span class="nav-text">本次主题分享内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具开发失败简史"><span class="nav-number">3.</span> <span class="nav-text">工具开发失败简史</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitsquid-1-0"><span class="nav-number">3.1.</span> <span class="nav-text">Bitsquid 1.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitsquid-2-0"><span class="nav-number">3.2.</span> <span class="nav-text">Bitsquid 2.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitsquid-3-0"><span class="nav-number">3.3.</span> <span class="nav-text">Bitsquid 3.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stingray"><span class="nav-number">3.4.</span> <span class="nav-text">Stingray</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitsquid-Stingray-的核心问题"><span class="nav-number">3.5.</span> <span class="nav-text">Bitsquid/Stingray 的核心问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么改变开发框架"><span class="nav-number">3.6.</span> <span class="nav-text">为什么改变开发框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么工具开发会如此耗时"><span class="nav-number">3.7.</span> <span class="nav-text">为什么工具开发会如此耗时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么会遇到性能问题"><span class="nav-number">3.8.</span> <span class="nav-text">为什么会遇到性能问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我们如何解决这些问题"><span class="nav-number">3.9.</span> <span class="nav-text">我们如何解决这些问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新的数据模型"><span class="nav-number">4.</span> <span class="nav-text">新的数据模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Truth"><span class="nav-number">4.1.</span> <span class="nav-text">The Truth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程无锁访问"><span class="nav-number">4.2.</span> <span class="nav-text">多线程无锁访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Undo"><span class="nav-number">4.3.</span> <span class="nav-text">Undo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prefabs-Prototypes"><span class="nav-number">4.4.</span> <span class="nav-text">Prefabs/Prototypes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Live-Collaboration"><span class="nav-number">4.5.</span> <span class="nav-text">Live Collaboration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Truth-Pros-amp-Cons"><span class="nav-number">4.6.</span> <span class="nav-text">The Truth: Pros &amp; Cons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简化技术栈"><span class="nav-number">5.</span> <span class="nav-text">简化技术栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我们的技术栈"><span class="nav-number">5.1.</span> <span class="nav-text">我们的技术栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Draw-2D-2DUI库"><span class="nav-number">5.2.</span> <span class="nav-text">Draw 2D: 2DUI库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Draw-2D-Clipping"><span class="nav-number">5.3.</span> <span class="nav-text">Draw 2D: Clipping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Draw-2D-Overlays"><span class="nav-number">5.4.</span> <span class="nav-text">Draw 2D: Overlays</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UI"><span class="nav-number">5.5.</span> <span class="nav-text">UI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMGUI-Pros-amp-Cons"><span class="nav-number">5.6.</span> <span class="nav-text">IMGUI: Pros &amp; Cons</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">5.7.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UI生成"><span class="nav-number">6.</span> <span class="nav-text">UI生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">7.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观后感"><span class="nav-number">8.</span> <span class="nav-text">观后感</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2018 &mdash; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-random"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('3');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
